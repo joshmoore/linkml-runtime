@@ -294,18 +294,12 @@ def as_json_object(element: YAMLRoot, contexts: CONTEXTS_PARAM_TYPE = None, inje
     :param inject_type: if True (default), add a @type at the top level
     :return: JsonObj representation of element
     """
-
     rval = copy(element)
-
-    if isinstance(rval, list):
-        return [as_json_object(x, contexts, inject_type) for x in rval]
-
     if inject_type:
         rval['@type'] = element.__class__.__name__
     context_element = merge_contexts(contexts)
     if context_element:
         rval['@context'] = context_element['@context']
-
     return rval
 
 

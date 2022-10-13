@@ -12,11 +12,7 @@ class YAMLDumper(Dumper):
         """ Return element formatted as a YAML string """
         # Internal note: remove_empty_items will also convert Decimals to int/float;
         # this is necessary until https://github.com/yaml/pyyaml/pull/372 is merged
-        try:
-            data = [remove_empty_items(x, hide_protected_keys=True) for x in element]
-        except:
-            data= remove_empty_items(element, hide_protected_keys=True)
-        return yaml.dump(data,
-                         Dumper=yaml.SafeDumper, sort_keys=False,
+        return yaml.dump(remove_empty_items(element, hide_protected_keys=True),
+                         Dumper=yaml.SafeDumper, sort_keys=False, 
                          allow_unicode=True,
                          **kwargs)

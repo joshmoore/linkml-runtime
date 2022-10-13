@@ -14,7 +14,14 @@ class Dumper(ABC):
         :@param _: method specific arguments
         """
         with open(to_file, 'w', encoding='UTF-8') as output_file:
-            output_file.write(self.dumps(element, **_))
+            if not isinstance(element, list):
+                data = [element]
+            else:
+                raise Exception()
+            for x in data:
+                rsp = self.dumps(x, **_)
+                print(rsp)
+                output_file.write(rsp)
 
     @abstractmethod
     def dumps(self, element: YAMLRoot, **_) -> str:

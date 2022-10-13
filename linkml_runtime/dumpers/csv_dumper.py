@@ -23,7 +23,11 @@ class CSVDumper(Dumper):
         """ Return element formatted as CSV lines """
         json_dumper = JSONDumper()
         element_j = json.loads(json_dumper.dumps(element))
-        objs = element_j[index_slot]
+        try:
+            objs = element_j[index_slot]
+        except:
+            print(element_j)
+            raise
         if schemaview is None:
             schemaview = SchemaView(schema)
         configmap = get_configmap(schemaview, index_slot)

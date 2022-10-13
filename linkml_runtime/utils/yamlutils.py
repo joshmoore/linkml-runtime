@@ -59,6 +59,7 @@ class YAMLRoot(JsonObj):
 
         if isinstance(obj, YAMLRoot):
             rval = dict()
+            rval["@type"] = obj.__class__.__name__
             for k, v in (filtr(obj.__dict__) if filtr else obj.__dict__).items():
                 is_classvar = k.startswith("type_") and hasattr(type(obj), k)
                 if is_classvar:
